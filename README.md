@@ -71,9 +71,25 @@ to crawl websites... and almost everything that you can do with chrome as a huma
     $browser->close();
 ```
 
+To avoid ``HeadlessChromium\Exception\OperationTimedOut`` exception increase the timeout option.
+
+```php
+  $page->navigate('http://example.com')->waitForNavigation(Page::LOAD, 10000);
+  
+  ...
+  
+  $eval->getReturnValue(10000);
+```
+
 ### Using different chrome executable
 
 When starting the factory will look for the environment variable ``"CHROME_PATH"`` to find the chrome executable.
+Use slashes to avoid .env file crashing when setting up CHROME_PATH variable.
+
+```
+    CHROME_PATH="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+```
+
 If the variable is not found then it will use ``"chrome"`` as the executable.
 
 You can use any executable of your choice. For instance ``"chromium-browser"``:
